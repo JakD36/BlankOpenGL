@@ -3,7 +3,7 @@ project(AssimpTest)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory (extern)
+add_subdirectory (extern EXCLUDE_FROM_ALL)
 
 include_directories(
         include
