@@ -7,10 +7,11 @@ add_subdirectory (extern EXCLUDE_FROM_ALL)
 
 include_directories(
         include
+        extern/imgui
         .
 )
 
-add_executable(AssimpTest main.cpp)
+add_executable(AssimpTest main.cpp )
 
 if(APPLE)
     SET (CMAKE_CXX_FLAGS "-fsized-deallocation")

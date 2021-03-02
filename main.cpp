@@ -9,6 +9,19 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#define IMGUI_IMPL_OPENGL_LOADER_GLEW
+#include "imgui.h"
+#include "backends/imgui_impl_opengl3.h"
+#include "backends/imgui_impl_glfw.h"
+
+#include <imgui.cpp>
+#include <imgui_demo.cpp>
+#include <imgui_draw.cpp>
+#include <imgui_tables.cpp>
+#include <imgui_widgets.cpp>
+#include <backends/imgui_impl_opengl3.cpp>
+#include <backends/imgui_impl_glfw.cpp>
+
 using namespace std;
 
 int main()
@@ -44,10 +57,23 @@ int main()
     glfwWindowHint(GLFW_SAMPLES,32);
     glfwWindowHint(GLFW_STEREO, GL_FALSE);
 
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::StyleColorsDark();
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 410 core");
+
     while(glfwGetTime() < 5)
     {
         glfwPollEvents();
         glfwSwapBuffers(window);
+
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::Render();
     }
 
     glfwDestroyWindow(window);
